@@ -1,16 +1,15 @@
-import sys
 import os
+import re
+import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-import re
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-from PIL import Image
+import matplotlib.pyplot as plt  # noqa: E402
+import streamlit as st  # noqa: E402
+from PIL import Image  # noqa: E402
 
-from src.loader import SlackDataLoader
-from src.utils import add_time_columns
+from src.loader import SlackDataLoader  # noqa: E402
+from src.utils import add_time_columns  # noqa: E402
 
 # ── Page config ──────────────────────────────────────────────
 st.set_page_config(
@@ -18,6 +17,7 @@ st.set_page_config(
     page_icon="📊",
     layout="wide"
 )
+
 
 # ── Load data (cached so it only runs once) ───────────────────
 @st.cache_data
@@ -88,6 +88,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "By Messages", "By Replies", "By Reactions", "By Mentions"
 ])
 
+
 def make_user_bar(df_view, col, label, n=10):
     agg = df_view.groupby('user')[col].sum().reset_index()
     agg.columns = ['user', label]
@@ -106,6 +107,7 @@ def make_user_bar(df_view, col, label, n=10):
 
     plt.tight_layout()
     return fig
+
 
 with tab1:
     df_view['msg_count'] = 1
@@ -165,6 +167,7 @@ TECH_KEYWORDS = [
     'pandas', 'numpy', 'model', 'train', 'dataset', 'jupyter', 'notebook'
 ]
 
+
 def classify_message(text):
     if not isinstance(text, str) or text.strip() == '':
         return 'Other'
@@ -175,6 +178,7 @@ def classify_message(text):
     if re.search(r'^(yes|no|sure|correct|exactly)\b', t):
         return 'Answer'
     return 'Comment-Technical' if tech else 'Comment-NonTechnical'
+
 
 df_view['message_type'] = df_view['text'].apply(classify_message)
 type_counts = df_view['message_type'].value_counts()
