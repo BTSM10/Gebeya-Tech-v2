@@ -4,11 +4,14 @@ FROM python:3.11-slim
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy requirements first (allows Docker to cache this layer)
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install only production dependencies (no dev tools like jupyter, pytest, flake8)
+RUN pip install --no-cache-dir \
+    pandas \
+    matplotlib \
+    seaborn \
+    pymongo \
+    streamlit \
+    Pillow
 
 # Copy the rest of the project code
 COPY src/ ./src/
