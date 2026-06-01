@@ -36,8 +36,10 @@ def load_data():
         df['reply_count'].fillna(0).astype(int)
         if 'reply_count' in df.columns else 0
     )
-    df['reaction_count_clean'] = df['reactions'].apply(
-        lambda r: sum(x.get('count', 1) for x in r) if isinstance(r, list) else 0
+    df['reaction_count_clean'] = (
+        df['reactions'].apply(
+            lambda r: sum(x.get('count', 1) for x in r) if isinstance(r, list) else 0
+        ) if 'reactions' in df.columns else 0
     )
     df['mention_count'] = df['text'].apply(
         lambda t: len(re.findall(r'<@U[A-Z0-9]+>', str(t)))
