@@ -7,3 +7,5 @@ flake8
 pre-commit
 pytest
 pymongo
+streamlit
+Pillow
