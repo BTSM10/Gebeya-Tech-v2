@@ -6,3 +6,4 @@ notebook
 flake8
 pre-commit
 pytest
+pymongo
