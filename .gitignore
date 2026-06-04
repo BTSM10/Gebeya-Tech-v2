@@ -40,3 +40,6 @@ Thumbs.db
 .terraform/
 *.tfstate
 *.tfstate.backup
+*.pdf
+*.pptx
+generate_*.py
