@@ -1,4 +1,4 @@
-# Gebeya Week 1 Challenge — Slack Messages Analysis
+# Gebeya Week 1 Challenge — Slack Messages Analysis project
 
 Analysis of anonymized Slack messages from Gebeya Batch 6.
 
